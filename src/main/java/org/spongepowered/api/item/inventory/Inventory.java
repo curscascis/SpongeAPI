@@ -421,7 +421,7 @@ public interface Inventory extends Iterable<Inventory>, Nameable {
      */
     @Deprecated
     default <T extends Inventory> T query(Class<?>... types) {
-        QueryOperation[] operations = new QueryOperation[types.length];
+        QueryOperation<?>[] operations = new QueryOperation<?>[types.length];
         for (int i = 0; i < types.length; i++) {
             operations[i] = QueryOperationTypes.INVENTORY_TYPE.of(types[i].asSubclass(Inventory.class));
         }
@@ -443,7 +443,7 @@ public interface Inventory extends Iterable<Inventory>, Nameable {
      */
     @Deprecated
     default <T extends Inventory> T query(ItemType... types) {
-        QueryOperation[] operations = new QueryOperation[types.length];
+        QueryOperation<?>[] operations = new QueryOperation<?>[types.length];
         for (int i = 0; i < types.length; i++) {
             operations[i] = QueryOperationTypes.ITEM_TYPE.of(types[i]);
         }
@@ -466,7 +466,7 @@ public interface Inventory extends Iterable<Inventory>, Nameable {
      */
     @Deprecated
     default <T extends Inventory> T query(ItemStack... types) {
-        QueryOperation[] operations = new QueryOperation[types.length];
+        QueryOperation<?>[] operations = new QueryOperation<?>[types.length];
         for (int i = 0; i < types.length; i++) {
             operations[i] = QueryOperationTypes.ITEM_STACK_EXACT.of(types[i]);
         }
@@ -490,7 +490,7 @@ public interface Inventory extends Iterable<Inventory>, Nameable {
      */
     @Deprecated
     default <T extends Inventory> T query(InventoryProperty<?, ?>... props) {
-        QueryOperation[] operations = new QueryOperation[props.length];
+        QueryOperation<?>[] operations = new QueryOperation<?>[props.length];
         for (int i = 0; i < props.length; i++) {
             operations[i] = QueryOperationTypes.INVENTORY_PROPERTY.of(props[i]);
         }
@@ -509,7 +509,7 @@ public interface Inventory extends Iterable<Inventory>, Nameable {
      */
     @Deprecated
     default <T extends Inventory> T query(Translation... names) {
-        QueryOperation[] operations = new QueryOperation[names.length];
+        QueryOperation<?>[] operations = new QueryOperation<?>[names.length];
         for (int i = 0; i < names.length; i++) {
             operations[i] = QueryOperationTypes.INVENTORY_TRANSLATION.of(names[i]);
         }
@@ -536,7 +536,7 @@ public interface Inventory extends Iterable<Inventory>, Nameable {
      */
     @Deprecated
     default <T extends Inventory> T query(Object... args) {
-        List<QueryOperation> operations = new ArrayList<>(args.length);
+        List<QueryOperation<?>> operations = new ArrayList<>(args.length);
         for (Object arg : args) {
             if (arg instanceof InventoryProperty) {
                 operations.add(QueryOperationTypes.INVENTORY_PROPERTY.of((InventoryProperty<?, ?>) arg));
@@ -553,7 +553,7 @@ public interface Inventory extends Iterable<Inventory>, Nameable {
             // tests, and because the lens should never be exposed, I don't
             // think the generic test "arg.equals(lens)" was ever made use of.
         }
-        return query(operations.toArray(new QueryOperation[operations.size()]));
+        return query(operations.toArray(new QueryOperation<?>[operations.size()]));
     }
 
     /**
@@ -573,7 +573,7 @@ public interface Inventory extends Iterable<Inventory>, Nameable {
      */
     @Deprecated
     default <T extends Inventory> T queryAny(ItemStack... types) {
-        QueryOperation[] operations = new QueryOperation[types.length];
+        QueryOperation<?>[] operations = new QueryOperation<?>[types.length];
         for (int i = 0; i < types.length; i++) {
             operations[i] = QueryOperationTypes.ITEM_STACK_IGNORE_QUANTITY.of(types[i]);
         }
@@ -581,16 +581,15 @@ public interface Inventory extends Iterable<Inventory>, Nameable {
     }
 
     /**
->>>>>>> Re-add deprecated methods and add some javadoc.
      * Query this inventory for inventories matching any of the supplied
      * queries. Logical <code>OR</code> is applied between operands.
      *
-     * @param operations queries to check against
      * @param <T> expected inventory type, specified as generic to allow easy
      *      pseudo-duck-typing
+     * @param operations queries to check against
      * @return the query result
      */
-    <T extends Inventory> T query(QueryOperation...operations);
+    <T extends Inventory> T query(QueryOperation<?>... operations);
 
     /**
      * Returns the {@link PluginContainer} who built this inventory.

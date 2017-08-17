@@ -44,5 +44,5 @@ public interface QueryOperationType<T> extends CatalogType {
      * @return A query that may be passed to {@link
      * Inventory#query(QueryOperation...)}
      */
-    QueryOperation of(T arg);
+    QueryOperation<T> of(T arg);
 }

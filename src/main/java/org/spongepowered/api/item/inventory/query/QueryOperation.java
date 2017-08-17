@@ -29,5 +29,13 @@ package org.spongepowered.api.item.inventory.query;
  * filtering are implementation-specific and are not exposed in this
  * interface.
  */
-public interface QueryOperation {
+public interface QueryOperation<T> {
+
+    /**
+     * Returns the {@link QueryOperationType} used to
+     * {@linkplain QueryOperationType#of(Object) create} this query operation.
+     *
+     * @return The type of this query operation
+     */
+    QueryOperationType<T> getType();
 }

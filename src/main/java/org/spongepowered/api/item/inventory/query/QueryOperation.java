@@ -38,4 +38,5 @@ public interface QueryOperation<T> {
      * @return The type of this query operation
      */
     QueryOperationType<T> getType();
+
 }

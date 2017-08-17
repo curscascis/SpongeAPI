@@ -24,10 +24,12 @@
  */
 package org.spongepowered.api.item.inventory.query;
 
+import org.spongepowered.api.Nameable;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.InventoryProperty;
 import org.spongepowered.api.item.inventory.ItemStack;
+import org.spongepowered.api.item.inventory.property.InventoryTitle;
 import org.spongepowered.api.text.translation.Translation;
 import org.spongepowered.api.util.generator.dummy.DummyObjectProvider;
 
@@ -37,26 +39,61 @@ public final class QueryOperationTypes {
 
     // SORTFIELDS:ON
 
+    /**
+     * Tests based on an inventory property present on the target inventory.
+     *
+     * @see Inventory#getProperties(Inventory, Class)
+     */
     public static final QueryOperationType<InventoryProperty<?, ?>> INVENTORY_PROPERTY = DummyObjectProvider.createFor(QueryOperationType.class,
             "INVENTORY_PROPERTY");
 
+    /**
+     * Tests based on the title of the inventory.
+     *
+     * @see InventoryTitle
+     * @see Nameable#getName()
+     */
     public static final QueryOperationType<Translation> INVENTORY_TRANSLATION = DummyObjectProvider.createFor(QueryOperationType.class,
             "INVENTORY_TRANSLATION");
 
+    /**
+     * Tests based on the class of the inventory.
+     */
     public static final QueryOperationType<Class<? extends Inventory>> INVENTORY_TYPE = DummyObjectProvider.createFor(QueryOperationType.class,
             "INVENTORY_TYPE");
 
+    /**
+     * Allows a custom condition for the items contained within an item stack.
+     */
     public static final QueryOperationType<Predicate<ItemStack>> ITEM_STACK_CUSTOM = DummyObjectProvider.createFor(QueryOperationType.class,
             "ITEM_STACK_CUSTOM");
 
+    /**
+     * Tests for an exact match of the item stack contained in each slot.
+     *
+     * @see ItemStack#equals(Object)
+     */
     public static final QueryOperationType<ItemStack> ITEM_STACK_EXACT = DummyObjectProvider.createFor(QueryOperationType.class, "ITEM_STACK_EXACT");
 
+    /**
+     * Tests for an exact match of the item stack contained in each slot, with
+     * the exception of the quantity. This allows testing for custom data on
+     * item stacks that may be moved and stacked by players.
+     *
+     * @see ItemStack#equalTo(ItemStack)
+     */
     public static final QueryOperationType<ItemStack> ITEM_STACK_IGNORE_QUANTITY = DummyObjectProvider.createFor(QueryOperationType.class,
             "ITEM_STACK_IGNORE_QUANTITY");
 
+    /**
+     * Tests for a match of the type of item contained in each slot.
+     *
+     * @see ItemStack#getType()
+     */
     public static final QueryOperationType<ItemType> ITEM_TYPE = DummyObjectProvider.createFor(QueryOperationType.class, "ITEM_TYPE");
 
     // SORTFIELDS:OFF
 
     private QueryOperationTypes() {}
+
 }

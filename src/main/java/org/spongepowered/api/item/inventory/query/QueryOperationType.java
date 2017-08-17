@@ -45,4 +45,5 @@ public interface QueryOperationType<T> extends CatalogType {
      * Inventory#query(QueryOperation...)}
      */
     QueryOperation<T> of(T arg);
+
 }

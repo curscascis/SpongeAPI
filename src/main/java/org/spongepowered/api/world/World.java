@@ -416,7 +416,6 @@ public interface World extends Extent, WeatherUniverse, Viewer, ContextSource, M
      * Causes an {@link Explosion} in a world.
      *
      * @param explosion The explosion to cause
-     * @param cause The cause for the explosion
      */
     void triggerExplosion(Explosion explosion);
 
@@ -447,4 +446,20 @@ public interface World extends Extent, WeatherUniverse, Viewer, ContextSource, M
      * @throws IOException If the save failed
      */
     boolean save() throws IOException;
+
+    /**
+     * Gets the view distance for this world.
+     *
+     * @return The view distance
+     */
+    int getViewDistance();
+
+    /**
+     * Sets the view distance for this world.
+     *
+     * <p>The view distance must be greater than or equal to 3, andless than or equal to 32.</p>
+     *
+     * @param viewDistance The view distance
+     */
+    void setViewDistance(final int viewDistance);
 }

@@ -72,7 +72,7 @@ public interface BlockChangeFlag {
      * @param updateNeighbors Whether to update neighboring blocks
      * @return The relative flag with the desired update neighbors
      */
-    BlockChangeFlag setUpdateNeighbors(boolean updateNeighbors);
+    BlockChangeFlag withUpdateNeighbors(boolean updateNeighbors);
 
     /**
      * Gets the equivalent {@link BlockChangeFlag} of this flag
@@ -82,7 +82,7 @@ public interface BlockChangeFlag {
      * @param performBlockPhysics Whether to perform block physics
      * @return The relative flag with the desired block physics
      */
-    BlockChangeFlag setPerformBlockPhysics(boolean performBlockPhysics);
+    BlockChangeFlag withPhysics(boolean performBlockPhysics);
 
     /**
      * Gets the equivalent {@link BlockChangeFlag} of this flag with all
@@ -92,6 +92,10 @@ public interface BlockChangeFlag {
      * @param notifyObservers Whether to update observer blocks
      * @return The relative flag with the desired notify observers
      */
-    BlockChangeFlag setNotifyObservers(boolean notifyObservers);
+    BlockChangeFlag withNotifyObservers(boolean notifyObservers);
+
+    BlockChangeFlag andFlag(BlockChangeFlag flag);
+
+    BlockChangeFlag withFlag(BlockChangeFlag flag);
 
 }
